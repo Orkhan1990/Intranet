@@ -11,11 +11,9 @@
 
 .image{
   background: url("../public/images/mantruck.jpg");
-  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 1.5;
 }
-.blackFon{
-  background: rgba(0, 0, 0,0.4);
+.bgFon{
+  background-color: rgba(0, 0, 0,0.7);
 }

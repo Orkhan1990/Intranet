@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
-import NoPage from "./pages/NoPage"
-
+import NoPage from "./pages/NoPage";
 function App() {
 
   return (
     <Router>
-      <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="*" element={<NoPage />} />
-          <Route path="/sign-in" element={<SignIn/>} />
-      </Routes>
-    </Router>
+    <Routes>
+    
+        <Route path="/" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="*" element={<NoPage />} />
+    </Routes>
+  </Router>
   )
 }
 
