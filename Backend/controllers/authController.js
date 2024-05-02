@@ -1,11 +1,26 @@
 import User from "../models/userModel.js";
 import errorHandler from "../utility/errorHandler.js";
+import jwtToken from "jsonwebtoken"
 import bcrypt from "bcrypt";
 
 export const signIn = async (req, res, next) => {
   const{username,password}=req.body;
   try {
-    
+    const user=await User.findOne({username});
+    if(!user){
+        return next(errorHandler(401,"User not exist!!"));
+    }
+
+    const isMatchPassword=bcrypt.compareSync(password,user.password);
+    if(!isMatchPassword){
+      return next(errorHandler(401,"Password not match!!"));
+    }
+     
+    const token= jwtToken.sign({id:user.id,isAdmin:user.isAdmin},process.env.JWT_SECRET);
+    const{password:pass,...rest}=user._doc;
+    res.cookie("access_token",token,{httpOnly:true});
+
+   res.status(200).json(rest);
 
   } catch (error) {
     next(errorHandler(401,error.message));

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Label, TextInput } from "flowbite-react";
 import {Link,useNavigate} from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { successStart } from '../redux/features/auth/authSlice';
 
 
 
@@ -10,9 +12,10 @@ const SignIn = () => {
     const[formData,setFormData]=useState({
       username:"",
       password:""
-    })
-
+    });
     const navigate=useNavigate();
+    const dispatch=useDispatch();
+    console.log(formData);
 
     const handleChange=(e)=>{
       setFormData({...formData,[e.target.id]:e.target.value})
@@ -26,6 +29,7 @@ const SignIn = () => {
       try {
         const res = await fetch("http://localhost:3004/api/v1/auth/signIn", {
         method: "POST",
+        credentials: "include", // added this part
         headers: {
           "Content-Type": "application/json",
         },
@@ -39,6 +43,7 @@ const SignIn = () => {
         return;
       }
       if(res.ok){
+        dispatch(successStart(data))
         navigate("/")
       }
       setError("")
@@ -65,6 +70,9 @@ const SignIn = () => {
                     <Button type='submit'>Sign In</Button>
                 </form>
                 <p className='mt-2 text-sm'>{"Don't"} have any account? <Link to={"/sign-up"} className='text-sky-300' >Sign up</Link></p>
+                {
+                  error&&(<p className='mt-2 text-sm text-red-700'>{error}</p>)
+                }
             </div>
         </div>
     </div>
