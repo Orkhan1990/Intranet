@@ -19,10 +19,10 @@ const Header = () => {
         </Link>
         <nav className='flex items-center gap-2 text-sm font-serif'>
             {
-                currentUser?<span>{currentUser.username}</span>:"Sign In"
+                currentUser?<span>{currentUser.username}</span>:"Daxil ol"
             }
            
-            <Button className='cursor-pointer bg-blue-500' onClick={signOutButton}>Sign out</Button>
+            <Button className='cursor-pointer bg-blue-500' onClick={signOutButton}>Çıxış et</Button>
         </nav>
         </div>
     </div>

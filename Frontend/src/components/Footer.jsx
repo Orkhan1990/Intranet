@@ -11,9 +11,10 @@ const Footer = () => {
             alt=""
             className="h-20 object-cover"
           />
-          <div className="flex pt-8 text-sm">
+          <div className="flex pt-8 gap-1 text-sm">
             <p>&copy;</p>
             {new Date().getFullYear()}
+            <p>Improtex Trucks and Buses</p>
           </div>
         </Link>
       </div>

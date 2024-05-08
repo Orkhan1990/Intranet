@@ -23,7 +23,7 @@ const SignIn = () => {
     const handleFormSubmit=async(e)=>{
       e.preventDefault();
       if(formData.username===""||formData.email===""||formData.password===""){
-        return setError("The fields is required!!")
+        return setError("Xanaları doldur!!")
       }
 
       try {
@@ -43,7 +43,7 @@ const SignIn = () => {
         return;
       }
       if(data.isWorker){
-        return setError("Please contact administrator!")
+        return setError("Zəhmət olmasa administratorla əlaqə saxlayın !")
       }
       if(res.ok){
         dispatch(successStart(data))
@@ -60,19 +60,19 @@ const SignIn = () => {
     <div className='min-h-screen image'>
         <div className='bgFon min-h-screen flex justify-center items-center'>
             <div className='text-white w-[350px]'>
-                <h1 className='text-center text-5xl font-semibold'>Sign In</h1>
+                <h1 className='text-center text-5xl font-semibold'>Daxil ol</h1>
                 <form  className='flex flex-col gap-3 mt-5' onSubmit={handleFormSubmit}>
                     <div>
-                    <Label htmlFor="username" value="Username"  className='text-white text-md'/>
-                    <TextInput id="username" type="text" placeholder="Username" required onChange={handleChange}/>
+                    <Label htmlFor="username" value="İstifadəçi adı"  className='text-white text-md'/>
+                    <TextInput id="username" type="text" placeholder="İstifadəçi adı" required onChange={handleChange}/>
                     </div>
                     <div>
-                    <Label htmlFor="password" value="Password" className='text-white text-md'/>
+                    <Label htmlFor="password" value="Şifrə" className='text-white text-md'/>
                     <TextInput id="password" type="password"   onChange={handleChange}/>
                     </div>
-                    <Button type='submit'>Sign In</Button>
+                    <Button type='submit'>Daxil ol</Button>
                 </form>
-                <p className='mt-2 text-sm'>{"Don't"} have any account? <Link to={"/sign-up"} className='text-sky-300' >Sign up</Link></p>
+                <p className='mt-2 text-sm'>Hesab yoxdursa? <Link to={"/sign-up"} className='text-sky-300' >Qeydiyyatdan keç</Link></p>
                 {
                   error&&(<p className='mt-2 text-sm text-red-700'>{error}</p>)
                 }

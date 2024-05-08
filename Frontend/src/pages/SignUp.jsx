@@ -20,7 +20,7 @@ const SignUp = () => {
   const handleFormSubmit=async(e)=>{
     e.preventDefault();
     if(formData.username===""||formData.email===""||formData.password===""){
-      return setError("The fields is required!!")
+      return setError("Xanaları doldur!!")
     }
      try {
       const res = await fetch("http://localhost:3004/api/v1/auth/signUp", {
@@ -39,7 +39,7 @@ const SignUp = () => {
         return;
       }
       if(res.ok){
-        setSuccess("User successfuly registered!")
+        setSuccess("İstifadəçi uğurla qeydiyyatdan keçdi!")
       }
       setError("")
      } catch (error) {
@@ -51,23 +51,23 @@ const SignUp = () => {
     <div className='min-h-screen image'>
         <div className='bgFon min-h-screen flex justify-center items-center'>
             <div className='text-white w-[350px]'>
-                <h1 className='text-center text-5xl font-semibold'>Sign Up</h1>
+                <h1 className='text-center text-3xl font-semibold'>Qeydiyyatdan keç</h1>
                 <form  className='flex flex-col gap-3 mt-5' onSubmit={handleFormSubmit}>
                     <div>
-                    <Label htmlFor="username" value="Username"  className='text-white text-md'/>
-                    <TextInput id="username" type="text" placeholder="Username" required  onChange={handleChange}/>
+                    <Label htmlFor="username" value="İstifadəçi adı"  className='text-white text-md'/>
+                    <TextInput id="username" type="text" placeholder="İstifadəçi adı" required  onChange={handleChange}/>
                     </div>
                     <div>
-                    <Label htmlFor="email" value="Email"  className='text-white text-md'/>
-                    <TextInput id="email" type="email" placeholder="Email" required onChange={handleChange}/>
+                    <Label htmlFor="email" value="Elektron ünvan"  className='text-white text-md'/>
+                    <TextInput id="email" type="email" placeholder="Elektron ünvan" required onChange={handleChange}/>
                     </div>
                     <div>
-                    <Label htmlFor="password" value="Password" className='text-white text-md'/>
+                    <Label htmlFor="password" value="Şifrə" className='text-white text-md'/>
                     <TextInput id="password" type="password"  onChange={handleChange}/>
                     </div>
-                    <Button type='submit'>Sign Up</Button>
+                    <Button type='submit'>Qeydiyyatdan keç</Button>
                 </form>
-                <p className='mt-2 text-sm'>Have any account? <Link to={"/sign-in"} className='text-sky-300' >Sign in</Link></p>
+                <p className='mt-2 text-sm'>Hesab varsa? <Link to={"/sign-in"} className='text-sky-300' >Daxil ol</Link></p>
                 {
                   !error&&success&&(<p className='mt-2 text-sm text-green-300'>{success}</p>)
                 }
