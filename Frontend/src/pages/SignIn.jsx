@@ -42,6 +42,9 @@ const SignIn = () => {
         setError(data.message);
         return;
       }
+      if(data.isWorker){
+        return setError("Please contact administrator!")
+      }
       if(res.ok){
         dispatch(successStart(data))
         navigate("/")

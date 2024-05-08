@@ -19,6 +19,10 @@ const userSchema=new mongoose.Schema({
     isAdmin:{
         type:Boolean,
         default:true
+    },
+    isWorker:{
+        type:Boolean,
+        default:true
     }
 },{timestamps:true});
 

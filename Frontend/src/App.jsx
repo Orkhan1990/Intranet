@@ -4,12 +4,13 @@ import SignIn from "./pages/SignIn";
 import NoPage from "./pages/NoPage";
 import SignUp from "./pages/SignUp";
 import Protected from "./components/Protected";
+import Layout from "./components/Layout";
 function App() {
   return (
     <Router>
       <Routes>
         <Route element={<Protected/>}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Layout><Home /></Layout>} />
         </Route>
         <Route path="*" element={<NoPage />} />
         <Route path="/sign-in" element={<SignIn />} />

@@ -24,11 +24,16 @@ const initialState = {
             state.currentUser=null;
             state.error=action.payload;
             state.loading=false;
+        },
+        signOut:(state,action)=>{
+            state.currentUser=null;
+            state.error=null;
+            state.loading=false;
         }
     },
   })
 
-  export const { successStart,successLoading,successFaliure } = authSlice.actions;
+  export const { successStart,successLoading,successFaliure,signOut } = authSlice.actions;
   export default authSlice.reducer;
 
   
