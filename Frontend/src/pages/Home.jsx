@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="h-full image">
+    <div className="h-full home_image">
       <div className="backgroundFon flex flex-col items-end">
         <div className="bg-white w-[500px] p-10 rounded-lg m-20 ">
           «Improtex» qrupunun mühüm vә sürәtlә inkişaf edәn strukturlarından
