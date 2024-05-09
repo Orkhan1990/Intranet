@@ -42,3 +42,15 @@
   width: 200px;
   border-radius: 10px;
 }
+
+.image{
+  background: url("../public/images/improtex.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.backgroundFon{
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0,0.5);
+}
