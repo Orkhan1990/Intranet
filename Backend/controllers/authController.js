@@ -8,12 +8,12 @@ export const signIn = async (req, res, next) => {
   try {
     const user=await User.findOne({username});
     if(!user){
-        return next(errorHandler(401,"User not exist!!"));
+        return next(errorHandler(401,"Belə bir istifadəçi yoxdur!!"));
     }
 
     const isMatchPassword=bcrypt.compareSync(password,user.password);
     if(!isMatchPassword){
-      return next(errorHandler(401,"Password not match!!"));
+      return next(errorHandler(401,"Şifrə uyğun deyil!!"));
     }
      
     const token= jwtToken.sign({id:user.id,isAdmin:user.isAdmin},process.env.JWT_SECRET);
@@ -33,7 +33,7 @@ export const signUp = async (req, res, next) => {
     const userName=await User.findOne({username:req.body.username});
     const userEmail=await User.findOne({email:req.body.email});
     if(userName||userEmail){
-         next(errorHandler(401,"User already exist!"));
+         next(errorHandler(401,"İstifadəçi artıq mövcuddur!"));
          return;
     }
     const hashPassword=bcrypt.hashSync(req.body.password,10);
