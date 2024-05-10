@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signOut } from "../redux/features/auth/authSlice";
-import ServisSubMenu from "./ServisSubMenu";
+import SubMenu from "./SubMenu";
 import { CiSettings } from "react-icons/ci";
+import { navbarList } from "../data/data";
 
 const Header = () => {
   const [showSubMenu, setShowSubMenu] = useState(false);
+
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -21,6 +23,9 @@ const Header = () => {
   const handleMouseLeave = () => {
     setShowSubMenu(false);
   };
+  
+  
+
   return (
     <div className="bg-gray-600  h-[80px]">
       <div className="flex justify-between h-full pl-20 pr-20 items-center ">
@@ -32,23 +37,13 @@ const Header = () => {
           />
         </Link>
         <nav className="flex items-center gap-2 text-sm font-serif text-white">
-          <div className="flex items-center justify-evenly w-[500px]">
-            <div
-              className="relative cursor-pointer "
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <span>Servis</span>
-              {showSubMenu && (
-                <>
-                  <ServisSubMenu />
-                </>
-              )}
-            </div>
-            <span>Ehtiyyat hissələri</span>
-            <span>Müştərilər</span>
-            <span>Logistika</span>
-          </div>
+          <ul className="flex items-center justify-evenly w-[500px]">
+           {
+            navbarList.map((item,index)=>(
+              <SubMenu item={item} key={index}/>
+            ))
+           }
+          </ul>
           {currentUser ? <Button>{currentUser.username}</Button> : "Daxil ol"}
 
           <Button
