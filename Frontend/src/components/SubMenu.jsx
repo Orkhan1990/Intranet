@@ -8,7 +8,7 @@ const SubMenu = ({item}) => {
     <li onMouseEnter={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
       {
         item.subItems?(<>
-        <button aria-expanded={dropdown ? "true" : "false"} className="relative" >{item.title}</button>
+        <button aria-expanded={dropdown ? "true" : "false"} className="relative " >{item.title}</button>
         <Dropdown submenus={item.subItems}   dropdown={dropdown} />
         </>):(<a>{item.title}</a>)
       }

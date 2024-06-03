@@ -6,6 +6,9 @@ import SignUp from "./pages/SignUp";
 import Protected from "./components/Protected";
 import Layout from "./components/Layout";
 import NewCard from "./pages/NewCard";
+import NewClient from "./pages/NewClient";
+
+
 function App() {
   return (
     <Router>
@@ -13,6 +16,9 @@ function App() {
         <Route element={<Protected/>}>
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/newcard" element={<Layout><NewCard/></Layout>} />
+          <Route path="/newcard" element={<Layout><NewCard/></Layout>} />
+          <Route path="/newClient" element={<Layout><NewClient/></Layout>} />
+
         </Route>
         <Route path="*" element={<NoPage />} />
         <Route path="/sign-in" element={<SignIn />} />

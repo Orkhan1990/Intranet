@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from 'mongoose';
 import authRouter from "./routes/authRouter.js";
+import clientRouter from "./routes/clientRouter.js";
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -25,6 +26,8 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use("/api/v1/auth",authRouter);
+app.use("/api/v1/client",clientRouter);
+
 
 app.use((error,req,res,next)=>{
      const statusCode=error.statusCode||500;
