@@ -2,8 +2,45 @@ import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import React, { useState } from "react";
 
 const NewClient = () => {
-  const[formData,setFormData]=useState([]);
+  const [formData, setFormData] = useState({});
+  const[error,setError]=useState(false);
+  const[success,setSuccess]=useState("");
 
+
+  console.log(formData);
+
+  const handleSubmit = async (e) => {
+    e.pereventDefault();
+    try {
+
+      const res = await fetch("http://localhost:3004/api/v1/client/clientCreate", {
+        method: "POST",
+        credentials: "include", // added this part
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      const data=await res.json();
+       if(!res.ok||data.success===false){
+        setError(data.message)
+        setSuccess("")
+       }
+
+       if(res.ok){
+         setSuccess(`${data.companyName} şirkət yaradıldı`);
+         setError("")
+       }
+
+      
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  const handleChange = async (e) => {
+    setFormData({...formData,[e.target.id]:e.target.value})
+  };
 
   return (
     <div className="min-h-screen ">
@@ -11,9 +48,9 @@ const NewClient = () => {
         <h2 className="text-2xl text-center font-semibold">Yeni müştəri</h2>
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div>
-            <Label htmlFor="şirkət" value="Şirkət adı" />
+            <Label htmlFor="companyName" value="Şirkət adı" />
             <TextInput
-              id="şirkət"
+              id="companyName"
               type="text"
               placeholder="Şirkət adı"
               required
@@ -22,9 +59,9 @@ const NewClient = () => {
           </div>
 
           <div>
-            <Label htmlFor="şirkətNümayəndəsi" value="Şirkət nümayəndəsi" />
+            <Label htmlFor="companyRepresentative" value="Şirkət nümayəndəsi" />
             <TextInput
-              id="şirkətNümayəndəsi"
+              id="companyRepresentative"
               type="text"
               placeholder="Şirkət nümayəndəsi"
               required
@@ -32,37 +69,52 @@ const NewClient = () => {
             />
           </div>
           <div>
-            <Label htmlFor="telefon" value="Telefon nömrəsi" />
+            <Label htmlFor="phoneNumber" value="Telefon nömrəsi" />
             <TextInput
-              id="telefon"
+              id="phoneNumber"
               type="text"
               placeholder="Telefon nömrəsi"
               required
               onChange={handleChange}
+            />
+          </div>
 
+          <div>
+            <Label htmlFor="email" value="Email" />
+            <TextInput
+              id="email"
+              type="email"
+              placeholder="Email"
+              required
+              onChange={handleChange}
             />
           </div>
 
           <div>
             <Label htmlFor="address" value="Ünvan" />
-            <TextInput id="address" type="text" placeholder="Ünvan" required onChange={handleChange}/>
+            <TextInput
+              id="address"
+              type="text"
+              placeholder="Ünvan"
+              required
+              onChange={handleChange}
+            />
           </div>
 
           <div>
-            <Label htmlFor="rekvizit" value="Rekvizit" />
+            <Label htmlFor="requisite" value="Rekvizit" />
             <Textarea
-              id="rekvizit"
+              id="requisite"
               type="text"
               placeholder="Rekvizitlər...."
               rows={4}
               required
               onChange={handleChange}
-
             />
           </div>
           <div>
             <Label htmlFor="voen" value="Vöen" />
-            <TextInput id="voen" type="text" placeholder="Vöen" required />
+            <TextInput id="voen" type="text" placeholder="Vöen" required onChange={handleChange}/>
           </div>
 
           <div>
@@ -87,9 +139,9 @@ const NewClient = () => {
             />
           </div>
           <div>
-            <Label htmlFor="submitPerson" value="Təsdiq edən şəxs" />
+            <Label htmlFor="approver" value="Təsdiq edən şəxs" />
             <TextInput
-              id="submitPerson"
+              id="approver"
               type="text"
               placeholder="Təsdiq edən şəxs"
               required
@@ -98,29 +150,43 @@ const NewClient = () => {
           </div>
 
           <div>
-            <Label htmlFor="1ccode" value="1C kod" />
-            <TextInput id="1ccode" type="text" placeholder="1C kod" required onChange={handleChange}/>
+            <Label htmlFor="oneCCode" value="1C kod" />
+            <TextInput
+              id="oneCCode"
+              type="text"
+              placeholder="1C kod"
+              required
+              onChange={handleChange}
+            />
           </div>
           <div className="flex gap-20">
-          <div>
-            <Label htmlFor="tipi" value="Tipi" />
-            <Select id="tipi" required  onChange={handleChange}>
-              <option>Müştəri</option>
-              <option>Işçi</option>
-              <option>Təsisçi</option>
-              <option>İTB</option>
-            </Select>
+            <div>
+              <Label htmlFor="type" value="Tipi" />
+              <Select id="type" required onChange={handleChange}>
+                <option value={"customer"}>Müştəri</option>
+                <option value={"worker"}>Işçi</option>
+                <option value={"boss"}>Təsisçi</option>
+                <option value={"itb"}>İTB</option>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="typeOfStatus" value="FizikiHüquqi" />
+              <Select id="typeOfStatus" required onChange={handleChange}>
+                <option value={"phisical"}>Fiziki</option>
+                <option value={"legal"}>Hüquqi</option>
+              </Select>
+            </div>
           </div>
-          <div>
-            <Label htmlFor="fizikiHuquqi" value="FizikiHüquqi" />
-            <Select id="fizikiHuquqi" required>
-              <option>Fiziki</option>
-              <option>Hüquqi</option>
-            </Select>
-          </div>
-          </div>
-          <Button color="blue" className="w-[200px]">Yadda Saxla</Button>
+          <Button color="blue" className="w-[200px]">
+            Yadda Saxla
+          </Button>
         </form>
+        {
+          error&&<p className="text-red-600">{error}</p>
+        }
+        {
+          success&&!error&&<p className="text-blue-600">{success}</p>
+        }
       </div>
     </div>
   );

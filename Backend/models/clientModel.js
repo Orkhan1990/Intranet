@@ -43,7 +43,7 @@ const clientSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    OneCCode:{
+    oneCCode:{
         type:String
     },
     type:{
@@ -54,7 +54,7 @@ const clientSchema=new mongoose.Schema({
         type:String,
         required:true
     }
-})
+},{timestamps:true})
 
 
 const Client=mongoose.model("client",clientSchema);
