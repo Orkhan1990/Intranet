@@ -7,10 +7,10 @@ const NewClient = () => {
   const[success,setSuccess]=useState("");
 
 
-  console.log(formData);
+  // console.log(formData);
 
   const handleSubmit = async (e) => {
-    e.pereventDefault();
+    e.preventDefault();
     try {
 
       const res = await fetch("http://localhost:3004/api/v1/client/clientCreate", {
@@ -27,9 +27,8 @@ const NewClient = () => {
         setError(data.message)
         setSuccess("")
        }
-
        if(res.ok){
-         setSuccess(`${data.companyName} şirkət yaradıldı`);
+         setSuccess(`${data.companyName} şirkəti yaradıldı`);
          setError("")
        }
 
@@ -177,7 +176,7 @@ const NewClient = () => {
               </Select>
             </div>
           </div>
-          <Button color="blue" className="w-[200px]">
+          <Button type="submit" color="blue" className="w-[200px]">
             Yadda Saxla
           </Button>
         </form>
@@ -185,7 +184,7 @@ const NewClient = () => {
           error&&<p className="text-red-600">{error}</p>
         }
         {
-          success&&!error&&<p className="text-blue-600">{success}</p>
+          success&&!error&&<p className="text-green-600 mt-5">{success}</p>
         }
       </div>
     </div>

@@ -7,6 +7,7 @@ import Protected from "./components/Protected";
 import Layout from "./components/Layout";
 import NewCard from "./pages/NewCard";
 import NewClient from "./pages/NewClient";
+import ClientList from "./pages/ClientList";
 
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
           <Route path="/newcard" element={<Layout><NewCard/></Layout>} />
           <Route path="/newcard" element={<Layout><NewCard/></Layout>} />
           <Route path="/newClient" element={<Layout><NewClient/></Layout>} />
+          <Route path="/clientList" element={<Layout><ClientList/></Layout>} />
+
 
         </Route>
         <Route path="*" element={<NoPage />} />

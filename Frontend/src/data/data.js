@@ -78,7 +78,7 @@ export const navbarList = [
         },
         {
             title:"Müştərilərin siyahısı",
-            url:"/statisticClient"
+            url:"/clientList"
         },
         {
             title:"Müştərilərlə işləmək",
