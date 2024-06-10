@@ -53,6 +53,18 @@ const clientSchema=new mongoose.Schema({
     typeOfStatus:{
         type:String,
         required:true
+    },
+    av:{
+        type:Number,
+        default:0
+    },
+    partsDiscount:{
+        type:Number,
+        default:0
+    },
+    userId:{
+        type:String,
+        required:true
     }
 },{timestamps:true})
 

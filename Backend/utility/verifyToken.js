@@ -1,5 +1,5 @@
 import jwtToken from "jsonwebtoken";
-import errorHandler from "./errorHandler";
+import errorHandler from "./errorHandler.js";
 
 
 const verifyToken=async(req,res,next)=>{

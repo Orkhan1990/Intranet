@@ -2,7 +2,7 @@ import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import React, { useState } from "react";
 import {useSelector} from "react-redux";
 
-const NewClient = () => {
+const UpdateClient = () => {
   const [formData, setFormData] = useState({});
   const[error,setError]=useState(false);
   const[success,setSuccess]=useState("");
@@ -46,7 +46,7 @@ const {currentUser}=useSelector(state=>state.auth);
   return (
     <div className="min-h-screen ">
       <div className="m-10 max-w-2xl mx-auto">
-        <h2 className="text-2xl text-center font-semibold">Yeni müştəri</h2>
+        <h2 className="text-2xl text-center font-semibold">Müştəri məlumatın yeniləmək</h2>
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div>
             <Label htmlFor="companyName" value="Şirkət adı" />
@@ -193,4 +193,4 @@ const {currentUser}=useSelector(state=>state.auth);
   );
 };
 
-export default NewClient;
+export default UpdateClient;
