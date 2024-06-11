@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 const ClientList = () => {
@@ -33,43 +32,26 @@ const ClientList = () => {
   }, []);
   return (
     <div className="min-h-screen p-10">
-      <Table>
-        <Table.Head>
-          <Table.HeadCell>Şirkət adı</Table.HeadCell>
-          <Table.HeadCell>İşçilik</Table.HeadCell>
-          <Table.HeadCell>Zapcast</Table.HeadCell>
-          <Table.HeadCell>Price</Table.HeadCell>
-          <Table.HeadCell>
-            <span>Edit</span>
-          </Table.HeadCell>
-        </Table.Head>
-        <Table.Body className="divide-y">
-          {clients.map((client, index) => (
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {client.companyName}
-              </Table.Cell>
-              <Table.Cell>
-                <input type="text" className="w-10 h-7 p-1"/>
-              </Table.Cell>
-              <Table.Cell>
-                <input type="text"  className="w-10 h-7 p-1"/>
-              </Table.Cell>
-              <Table.Cell>
-                <input type="text" className="w-10 h-7 p-1"/>
-              </Table.Cell>
-              <Table.Cell>
-                <Link
-                  to={"/updateClient"}
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                >
-                  Edit
-                </Link>
-              </Table.Cell>
-            </Table.Row>
+      <div className="p-50 flex flex-col gap-2">
+        <div className="max-w-full flex justify-around bg-blue-200 p-2 rounded-md text-sm">
+          <span>Say</span>
+          <span>Şirkət adı</span>
+          <span>İşçilik</span>
+          <span>Ehtiyyat hissəsi</span>
+          <span>Dəyişmək</span>
+        </div>
+        <div className="max-w-full  flex flex-col gap-5 bg-blue-200 p-2 rounded-md">
+          {clients.map((item, index) => (
+            <form className="flex  justify-around items-center" key={index}>
+              <span>{index+1}</span>
+              <span>{item.companyName}</span>
+              <input type="text" className="w-[40px] h-[30px] p-2" />
+              <input type="text" className="w-[40px] h-[30px] p-2" />
+              <Link to={`/updateClient/${item._id}`} className="text-blue-600">Edit</Link>
+            </form>
           ))}
-        </Table.Body>
-      </Table>
+        </div>
+      </div>
     </div>
   );
 };

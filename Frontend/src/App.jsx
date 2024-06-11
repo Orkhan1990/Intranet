@@ -21,7 +21,7 @@ function App() {
           <Route path="/newcard" element={<Layout><NewCard/></Layout>} />
           <Route path="/newClient" element={<Layout><NewClient/></Layout>} />
           <Route path="/clientList" element={<Layout><ClientList/></Layout>} />
-          <Route path="/updateClient" element={<Layout><UpdateClient/></Layout>} />
+          <Route path="/updateClient/:id" element={<Layout><UpdateClient/></Layout>} />
         </Route>
         <Route path="*" element={<NoPage />} />
         <Route path="/sign-in" element={<SignIn />} />
