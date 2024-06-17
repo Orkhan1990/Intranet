@@ -24,3 +24,46 @@ export const getClients=async(req,res,next)=>{
         next(errorHandler(401,error.message));
     }
 }
+
+
+export const addDiscount=async(req,res,next)=>{
+    const {id}=req.params;
+    console.log(id,req.body);
+    try {
+        const client=await Client.findById(id);
+        if(!client){
+            return next(errorHandler(401,"Client not exist!"))
+        }
+        const updateClient=await Client.findByIdAndUpdate(id,{$set:req.body},{new:true})
+        res.status(201).json(updateClient);
+        
+    } catch (error) {
+        next(errorHandler(401,error.message));
+    }
+}
+
+export const getClient=async(req,res,next)=>{
+    const {id}=req.params;
+    console.log(id);
+    try {
+
+        const client=await Client.findById(id);
+        if(!client){
+            return next(errorHandler(401,"Client not exist!"))
+        }
+        res.status(200).json(client);
+        
+    } catch (error) {
+        next(errorHandler(401,error.message))
+    }
+}
+
+export const updateClient=async(req,res,next)=>{
+    const {id}=req.params;
+    try {
+        const updateClientData=await Client.findByIdAndUpdate(id,{$set:req.body},{new:true});
+        res.status(201).json(updateClientData)
+    } catch (error) {
+        next(errorHandler(401,error.message));
+    }
+}

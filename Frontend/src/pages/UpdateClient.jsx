@@ -1,21 +1,52 @@
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useSelector} from "react-redux";
+import { useParams } from "react-router-dom";
 
 const UpdateClient = () => {
   const [formData, setFormData] = useState({});
   const[error,setError]=useState(false);
   const[success,setSuccess]=useState("");
 
-const {currentUser}=useSelector(state=>state.auth);
+  const {currentUser}=useSelector(state=>state.auth);
+  const {id}=useParams()
 
-  console.log(currentUser);
+  console.log(id);
+
+  useEffect(()=>{
+
+    const getClientData=async()=>{
+         try {
+          const res = await fetch(`http://localhost:3004/api/v1/client/getClient/${id}`, {
+            method: "GET",
+            credentials: "include", // added this part
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          const data=await res.json();
+
+          if(!res.ok||data.success===false){
+            setError(data.message);
+            return;
+          }
+           console.log(data);
+          setFormData(data)
+          
+         } catch (error) {
+            setError(error.message);
+         }
+    }
+    getClientData();
+
+  },[id])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
 
-      const res = await fetch("http://localhost:3004/api/v1/client/clientCreate", {
+      const res = await fetch(`http://localhost:3004/api/v1/client/updateClient/${id}`, {
         method: "POST",
         credentials: "include", // added this part
         headers: {
@@ -30,7 +61,7 @@ const {currentUser}=useSelector(state=>state.auth);
         setSuccess("")
        }
        if(res.ok){
-         setSuccess(`${data.companyName} şirkəti yaradıldı`);
+         setSuccess(`${data.companyName} şirkətinin məlumatı yeniləndi`);
          setError("")
        }
 
@@ -56,6 +87,7 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Şirkət adı"
               required
               onChange={handleChange}
+              value={formData.companyName}
             />
           </div>
 
@@ -67,6 +99,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Şirkət nümayəndəsi"
               required
               onChange={handleChange}
+              value={formData.companyRepresentative}
+
             />
           </div>
           <div>
@@ -77,6 +111,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Telefon nömrəsi"
               required
               onChange={handleChange}
+              value={formData.companyRepresentative}
+
             />
           </div>
 
@@ -88,6 +124,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Email"
               required
               onChange={handleChange}
+              value={formData.email}
+
             />
           </div>
 
@@ -99,6 +137,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Ünvan"
               required
               onChange={handleChange}
+              value={formData.address}
+
             />
           </div>
 
@@ -111,11 +151,13 @@ const {currentUser}=useSelector(state=>state.auth);
               rows={4}
               required
               onChange={handleChange}
+              value={formData.requisite}
+
             />
           </div>
           <div>
             <Label htmlFor="voen" value="Vöen" />
-            <TextInput id="voen" type="text" placeholder="Vöen" required onChange={handleChange}/>
+            <TextInput id="voen" type="text" placeholder="Vöen" required onChange={handleChange} value={formData.voen}/>
           </div>
 
           <div>
@@ -126,6 +168,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Müqavilə nömrəsi"
               required
               onChange={handleChange}
+              value={formData.contractNumber}
+
             />
           </div>
 
@@ -137,6 +181,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Müqavilə tarixi"
               required
               onChange={handleChange}
+              value={formData.contractDate}
+
             />
           </div>
           <div>
@@ -147,6 +193,8 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="Təsdiq edən şəxs"
               required
               onChange={handleChange}
+              value={formData.approver}
+
             />
           </div>
 
@@ -158,12 +206,15 @@ const {currentUser}=useSelector(state=>state.auth);
               placeholder="1C kod"
               required
               onChange={handleChange}
+              value={formData.oneCCode}
+
             />
           </div>
           <div className="flex gap-20">
             <div>
               <Label htmlFor="type" value="Tipi" />
-              <Select id="type" required onChange={handleChange}>
+              <Select id="type" required onChange={handleChange} value={formData.type}
+              >
                 <option value={"customer"}>Müştəri</option>
                 <option value={"worker"}>Işçi</option>
                 <option value={"boss"}>Təsisçi</option>
@@ -172,7 +223,7 @@ const {currentUser}=useSelector(state=>state.auth);
             </div>
             <div>
               <Label htmlFor="typeOfStatus" value="FizikiHüquqi" />
-              <Select id="typeOfStatus" required onChange={handleChange}>
+              <Select id="typeOfStatus" required onChange={handleChange} value={formData.typeOfStatus}>
                 <option value={"phisical"}>Fiziki</option>
                 <option value={"legal"}>Hüquqi</option>
               </Select>

@@ -42,7 +42,7 @@ const SignIn = () => {
         setError(data.message);
         return;
       }
-      if(data.isWorker){
+      if(data.isWorker&&!data.isAdmin){
         return setError("Zəhmət olmasa administratorla əlaqə saxlayın !")
       }
       if(res.ok){
