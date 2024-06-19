@@ -2,6 +2,7 @@ import { Label, Select, TextInput,Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import SelectWithButtons from "../components/SelectWithButtons";
 
 const NewCard = () => {
   const [error, setError] = useState(false);
@@ -163,14 +164,7 @@ const NewCard = () => {
           <h2>Problemlər</h2>
           <div className="flex gap-[250px] mt-2">
           <TextInput type="text" className="w-[500px]" />
-          <div className="flex gap-4 items-center">
-            <span className="text-[25px] cursor-pointer">-</span>
-          <Select className="w-[250px]">
-            <option value="">İsciler</option>
-            </Select>
-            <span className="text-[25px] cursor-pointer">+</span>
-
-          </div>
+         <SelectWithButtons/>
         
           </div>
           <Button color="blue" className="mt-5">Əlavə et <span className="ml-2 ">+</span></Button>
