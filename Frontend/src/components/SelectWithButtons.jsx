@@ -14,28 +14,31 @@ const SelectWithButtons = () => {
     }
   };
   return (
-    <div className="flex gap-4 items-center">
-      <span
+    <div  className="flex flex-col gap-4">
+      {[...Array(selectCount)].map((_, index) => (
+        <div className="flex gap-4 items-center">
+          
+          <span
         className="text-[25px] cursor-pointer"
         onClick={decrementSelectCount}
       >
         -
       </span>
-      <div className="flex flex-col gap-2">
-      {[...Array(selectCount)].map((_, index) => (
         <Select className="w-[250px]" key={index}>
           <option value="">İsciler</option>
         </Select>
-      ))}
-      </div>
-
-      <span
+        <span
         className="text-[25px] cursor-pointer"
         onClick={incrementSelectCount}
       >
         +
       </span>
-    </div>
+        </div>
+      ))}
+      </div>
+
+    
+  
   );
 };
 

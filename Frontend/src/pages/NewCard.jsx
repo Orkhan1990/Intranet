@@ -1,8 +1,9 @@
-import { Label, Select, TextInput,Button } from "flowbite-react";
+import { Label, Select, TextInput,Button,Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-import SelectWithButtons from "../components/SelectWithButtons";
+import NewCardProblems from "../components/NewCardProblems";
+import NewCardWorkers from "../components/NewCardWorkers";
 
 const NewCard = () => {
   const [error, setError] = useState(false);
@@ -47,8 +48,8 @@ const NewCard = () => {
 
             <Select className="flex-1">
               <option value="">Müştərini seç</option>
-              {clients.map((item) => (
-                <option value={item.companyName}>{item.companyName}</option>
+              {clients.map((item,index) => (
+                <option value={item.companyName} key={index}>{item.companyName}</option>
               ))}
             </Select>
 
@@ -65,17 +66,17 @@ const NewCard = () => {
           <h2>Gediş</h2>
           <div className="flex gap-4">
             <div className="flex gap-2 items-center">
-            <input  id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+            <input  id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
 
               <span>Gediş</span>
             </div>
             <div className="flex gap-2 items-center">
-            <input  id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+            <input  id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
 
               <span>Bobcat zəmanət</span>
             </div>
             <div className="flex gap-2 items-center">
-            <input  id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+            <input  id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
 
               <span>AMMANN zəmanət</span>
             </div>
@@ -147,28 +148,23 @@ const NewCard = () => {
           </div>
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">ƏDV</span>
-            <input  id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+            <input  id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
 
           </div>
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">Təkrar təmir</span>
-            <input  id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+            <input  id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
             </div>
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">Servis məlumatı</span>
-            <input  id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+            <input  id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
             </div>
         </div>
          
-        <div className="border p-5 rounded-md">
-          <h2>Problemlər</h2>
-          <div className="flex gap-[250px] mt-2">
-          <TextInput type="text" className="w-[500px]" />
-         <SelectWithButtons/>
+        <NewCardProblems/>
+        <NewCardWorkers/>
         
-          </div>
-          <Button color="blue" className="mt-5">Əlavə et <span className="ml-2 ">+</span></Button>
-        </div>
+
       </form>
     </div>
   );
