@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SelectWithButtons from "../components/SelectWithButtons";
 import { TextInput, Button } from "flowbite-react";
 
-const NewCardProblems = () => {
+const NewCardProblems = ({workers}) => {
   const [count, setCount] = useState(1);
 
   const incrementCount = () => {
@@ -19,7 +19,7 @@ const NewCardProblems = () => {
       {[...Array(count)].map((_, index) => (
         <div className="flex gap-[250px] mt-2" key={index}>
           <TextInput type="text" className="w-[500px]" />
-          <SelectWithButtons />
+          <SelectWithButtons workers={workers} />
         </div>
       ))}
       <div className="flex gap-5">

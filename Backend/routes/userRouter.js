@@ -1,10 +1,12 @@
 import express from "express";
+import { getWorkers } from "../controllers/userController.js";
+
 
 
 const router=express.Router();
 
 
-// router.post("")
+router.get("/getworkers",getWorkers)
 
 
 

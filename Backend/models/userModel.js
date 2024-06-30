@@ -7,6 +7,14 @@ const userSchema=new mongoose.Schema({
         required:true,
         unique:true
     },
+    firstName:{
+    type:String,
+    default:""
+    },
+    lastName:{
+     type:String,
+     default:""
+    },
     email:{
         type:String,
         required:true,
@@ -18,7 +26,7 @@ const userSchema=new mongoose.Schema({
     },
     isAdmin:{
         type:Boolean,
-        default:true
+        default:false
     },
     isWorker:{
         type:Boolean,

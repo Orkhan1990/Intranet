@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import authRouter from "./routes/authRouter.js";
 import clientRouter from "./routes/clientRouter.js";
+import userRouter from "./routes/userRouter.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
@@ -33,6 +34,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/client", clientRouter);
+app.use("/api/v1/user",userRouter);
 
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;

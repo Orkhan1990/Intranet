@@ -12,10 +12,37 @@ import { FiPrinter } from "react-icons/fi";
 const NewCard = () => {
   const [error, setError] = useState(false);
   const [clients, setClients] = useState([]);
+  const [workers,setWorkers]=useState([]);
 
-  console.log(clients);
+  console.log(clients,workers);
 
   useEffect(() => {
+    const getWorkers=async()=>{
+      try {
+        const res = await fetch(
+          "http://localhost:3004/api/v1/user/getWorkers",
+          {
+            method: "GET",
+            credentials: "include", // added this part
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data=await res.json();
+
+        if(!res.ok||data.success===false){
+          setError(data.message);
+          return;
+        }
+
+        setWorkers(data)
+      } catch (error) {
+        setError(error.message)
+      }
+  }
+  getWorkers();
     const getClients = async () => {
       try {
         const res = await fetch(
@@ -165,8 +192,8 @@ const NewCard = () => {
             </div>
         </div>
          
-        <NewCardProblems/>
-        <NewCardWorkers/>
+        <NewCardProblems workers={workers}/>
+        <NewCardWorkers workers={workers}/>
         <AddCharges/>
         <NewCardAddParts/>
         

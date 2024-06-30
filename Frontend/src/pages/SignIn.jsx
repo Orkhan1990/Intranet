@@ -42,8 +42,9 @@ const SignIn = () => {
         setError(data.message);
         return;
       }
-      if(data.isWorker&&!data.isAdmin){
-        return setError("Zəhmət olmasa administratorla əlaqə saxlayın !")
+      if(data.isWorker===true&&!data.isAdmin){
+        setError("Zəhmət olmasa administratorla əlaqə saxlayın !")
+        return;
       }
       if(res.ok){
         dispatch(successStart(data))

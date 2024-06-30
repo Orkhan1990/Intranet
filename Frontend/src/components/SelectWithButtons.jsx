@@ -1,7 +1,7 @@
 import { Select } from "flowbite-react";
 import React, { useState } from "react";
 
-const SelectWithButtons = () => {
+const SelectWithButtons = ({workers}) => {
   const [selectCount, setSelectCount] = useState(1);
 
   const incrementSelectCount = () => {
@@ -26,6 +26,11 @@ const SelectWithButtons = () => {
       </span>
         <Select className="w-[250px]" key={index}>
           <option value="">İsciler</option>
+          {
+            workers&&workers.map((worker,index)=>(
+              <option value={worker._id}>{worker.firstName+" "+worker.lastName}</option>
+            ))
+          }
         </Select>
         <span
         className="text-[25px] cursor-pointer"

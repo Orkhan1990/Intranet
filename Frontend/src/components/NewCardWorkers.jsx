@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NewCardWorkersName from "./NewCardWorkersName";
 
-const NewCardWorkers = () => {
+const NewCardWorkers = ({workers}) => {
   const [count, selectCount] = useState(1);
   const incrementCount = () => {
     selectCount(count + 1);
@@ -57,7 +57,7 @@ const NewCardWorkers = () => {
                 <TextInput type="text" className="w-[70px]" />
               </Table.Cell>
               <Table.Cell>
-                <NewCardWorkersName />
+                <NewCardWorkersName workers={workers}/>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
