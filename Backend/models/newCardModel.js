@@ -1,0 +1,64 @@
+import mongoose from "mongoose";
+
+
+const newCard=new mongoose.Schema({
+     user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"users",
+        required:true
+     },
+     client:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"client",
+        required:true
+     },
+     type:{
+        type:String
+     },
+     manufactured:{
+        type:String
+     },
+     model:{
+        type:String
+     },
+     sassi:{
+        type:String
+     },
+     carNumber:{
+        type:String
+     },
+     produceDate:{
+        type:String
+     },
+     km:{
+        type:String
+     },
+     qostNumber:{
+        type:String
+     },
+     paymentType:{
+        type:String
+     },
+     nds:{
+        type:Boolean
+     },
+     isOpen:{
+        type:Boolean   
+      },
+      repairAgain:{
+        type:Boolean
+      },
+      servisInfo:{
+       type:Boolean
+      },
+      comments:{
+        type:String
+      },
+      recommendadtion:{
+        type:String
+      },
+      closeDate:{
+        type:Date
+      }
+},{timestamps:true})
+

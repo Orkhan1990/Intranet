@@ -23,7 +23,7 @@ const NewCardWorkersName = () => {
           >
             -
           </span>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-[200px]">
             <TextInput type="text" className="w-[70px]" />
             <Select className="w-[250px]" key={index}>
               <option value="">İsciler</option>

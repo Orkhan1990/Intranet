@@ -15,3 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </PersistGate>
   </React.StrictMode>
 );
+window.addEventListener('beforeunload', () => {
+  // Clear persisted state from localStorage
+  persistor.purge();
+});

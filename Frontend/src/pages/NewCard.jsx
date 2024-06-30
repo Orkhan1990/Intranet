@@ -1,9 +1,13 @@
-import { Label, Select, TextInput,Button,Table } from "flowbite-react";
+import { Label, Select, TextInput,Button,Table, Textarea } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import NewCardProblems from "../components/NewCardProblems";
 import NewCardWorkers from "../components/NewCardWorkers";
+import NewCardAddParts from "../components/NewCardAddParts";
+import AddCharges from "../components/AddCharges";
+import { FiPrinter } from "react-icons/fi";
+
 
 const NewCard = () => {
   const [error, setError] = useState(false);
@@ -39,7 +43,7 @@ const NewCard = () => {
     getClients();
   }, []);
   return (
-    <div className="min-h-screen m-10">
+    <div className="min-h-screen m-10 ">
       <h2 className="text-center text-lg font-semibold">Yeni kart yarat</h2>
       <form className="mt-10 flex flex-col gap-5 text-sm">
         <div className="border rounded-md p-5">
@@ -163,8 +167,25 @@ const NewCard = () => {
          
         <NewCardProblems/>
         <NewCardWorkers/>
+        <AddCharges/>
+        <NewCardAddParts/>
         
-
+        <div className="border p-5 rounded-md">
+          <h2 className='font-semibold mb-5'>İş haqqında şərhlər</h2>
+          <Textarea rows={4} placeholder="Şərh yaz....."/>
+        </div>
+        <div className="border p-5 rounded-md">
+          <h2 className='font-semibold mb-5'>Məsləhətlər</h2>
+          <Textarea rows={4} />
+        </div>
+        <div className="flex gap-2 items-center">
+         <Button color={"blue"}>Yadda Saxla</Button>
+        <div  className="w-[110px] flex justify-center gap-2 p-3 items-center  bg-blue-700 text-white  rounded-lg cursor-pointer hover:bg-blue-800">
+          <span>Çap et</span>
+          <FiPrinter />
+          </div>
+        </div>
+       
       </form>
     </div>
   );
