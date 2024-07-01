@@ -102,30 +102,7 @@ const ClientList = () => {
         </Table.Body>
       </Table>
       </form>
-      {/* <div className="p-50 flex flex-col gap-2">
-        <div className="max-w-full flex justify-evenly bg-blue-200 p-2 rounded-md text-sm">
-          <span>Say</span>
-          <span>Şirkət adı</span>
-          <span>İşçilik</span>
-          <span>Ehtiyyat hissəsi</span>
-          <span>Ehtiyyat hissəsi</span>
-          <span>Ehtiyyat hissəsi</span>
-          <span>Dəyişmək</span>
-        </div>
-        <div className="max-w-full  flex flex-col gap-5 bg-blue-200 p-2 rounded-md">
-          {clients.map((item, index) => (
-            <form className="flex   items-center" key={index}>
-              <span>{index+1}</span>
-              <span>{item.companyName}</span>
-              <input onBlur={()=>handleSubmit(item._id)} type="text" id="av" onChange={handleChange} className="w-[40px] h-[30px] p-2"  defaultValue={item.av}/>
-              <input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="w-[40px] h-[30px] p-2"  defaultValue={item.partsDiscount}/>
-              <input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="w-[40px] h-[30px] p-2"  defaultValue={item.partsDiscount}/>
-              <input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="w-[40px] h-[30px] p-2"  defaultValue={item.partsDiscount}/>
-              <Link to={`/updateClient/${item._id}`} className="text-blue-600">Edit</Link>
-            </form>
-          ))}
-        </div>
-      </div> */}
+    
     </div>
   );
 };
