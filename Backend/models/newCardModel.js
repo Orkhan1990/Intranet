@@ -1,64 +1,94 @@
 import mongoose from "mongoose";
 
+const newCardSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      //   required:true
+    },
+    clientId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "client",
+      //   required:true
+    },
+    newCardProblems: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "newCardProblems",
+      },
+    ],
 
-const newCard=new mongoose.Schema({
-     user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"users",
-        required:true
-     },
-     client:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"client",
-        required:true
-     },
-     type:{
-        type:String
-     },
-     manufactured:{
-        type:String
-     },
-     model:{
-        type:String
-     },
-     sassi:{
-        type:String
-     },
-     carNumber:{
-        type:String
-     },
-     produceDate:{
-        type:String
-     },
-     km:{
-        type:String
-     },
-     qostNumber:{
-        type:String
-     },
-     paymentType:{
-        type:String
-     },
-     nds:{
-        type:Boolean
-     },
-     isOpen:{
-        type:Boolean   
+    type: {
+      type: String,
+    },
+    manufactured: {
+      type: String,
+    },
+    model: {
+      type: String,
+    },
+    sassi: {
+      type: String,
+    },
+    carNumber: {
+      type: String,
+    },
+    produceDate: {
+      type: String,
+    },
+    km: {
+      type: String,
+    },
+    qostNumber: {
+      type: String,
+    },
+    paymentType: {
+      type: String,
+    },
+    nds: {
+      type: Boolean,
+    },
+    isOpen: {
+      type: Boolean,
+    },
+    repairAgain: {
+      type: Boolean,
+    },
+    servisInfo: {
+      type: Boolean,
+    },
+    comments: {
+      type: String,
+    },
+    recommendation: {
+      type: String,
+    },
+    closeDate: {
+      type: Date,
+    },
+    workers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "newCardWorkers",
       },
-      repairAgain:{
-        type:Boolean
+    ],
+    charges: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "newCardCharges",
       },
-      servisInfo:{
-       type:Boolean
+    ],
+    parts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "newCardParts",
       },
-      comments:{
-        type:String
-      },
-      recommendadtion:{
-        type:String
-      },
-      closeDate:{
-        type:Date
-      }
-},{timestamps:true})
+    ],
+  },
+  { timestamps: true }
+);
 
+const NewCard = mongoose.model("newCards", newCardSchema);
+
+export default NewCard;

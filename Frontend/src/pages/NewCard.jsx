@@ -16,6 +16,7 @@ import AddCharges from "../components/AddCharges";
 import { FiPrinter } from "react-icons/fi";
 
 const NewCard = () => {
+  const[formData,setFormData]=useState({})
   const [error, setError] = useState(false);
   const [clients, setClients] = useState([]);
   const [workers, setWorkers] = useState([]);
@@ -25,6 +26,7 @@ const NewCard = () => {
 
   console.log(clients, workers);
   console.log(open);
+  console.log(formData);
 
   useEffect(() => {
     const getWorkers = async () => {
@@ -81,13 +83,16 @@ const NewCard = () => {
   }, []);
 
   const handleChange = (e) => {
-    if (
-      e.target.value === "gedis" ||
-      e.target.value === "bobcatWaranty" ||
-      e.target.value === "hamannWaranty"
-    ) {
-      setOpen(e.target.checked);
-    }
+
+
+    setFormData({...formData,[e.target.id]:e.target.value})
+    // if (
+    //   e.target.value === "gedis" ||
+    //   e.target.value === "bobcatWaranty" ||
+    //   e.target.value === "hamannWaranty"
+    // ) {
+    //   setOpen(e.target.checked);
+    // }
   };
   return (
     <div className="min-h-screen m-10 ">
@@ -97,7 +102,7 @@ const NewCard = () => {
           <div className="flex items-center gap-10">
             <Label htmlFor="client" value="Müştəri adı" />
 
-            <Select className="flex-1" onChange={handleChange}>
+            <Select className="flex-1" onChange={handleChange} id="clientId">
               <option value="">Müştərini seç</option>
               {clients.map((item, index) => (
                 <option value={item._id} key={index}>
@@ -260,7 +265,7 @@ const NewCard = () => {
         <div className="border p-5 rounded-md flex flex-col gap-5">
           <div className="flex items-center">
             <span className="w-[300px]">Texnikanın növü</span>
-            <Select onChange={handleChange}>
+            <Select onChange={handleChange} id="type">
               <option value="tiqac">Tiqac</option>
               <option value="yaripricep">Yarı pricep</option>
               <option value="pricep">Pricep</option>
@@ -271,7 +276,7 @@ const NewCard = () => {
           </div>
           <div className="flex  items-center">
             <span className="w-[300px]">Istehsalçı</span>
-            <Select onChange={handleChange}>
+            <Select onChange={handleChange} id="manufactured">
               <option value="man">MAN</option>
               <option value="mercedes">Mercedes</option>
               <option value="daf">DAF</option>
@@ -285,6 +290,7 @@ const NewCard = () => {
               type="text"
               className="w-[500px]"
               onChange={handleChange}
+              id="model"
             />
           </div>
           <div className="flex  items-center">
@@ -293,6 +299,7 @@ const NewCard = () => {
               type="text"
               className="w-[500px]"
               onChange={handleChange}
+              id="sassi"
             />
           </div>
           <div className="flex  items-center">
@@ -301,11 +308,12 @@ const NewCard = () => {
               type="text"
               className="w-[500px]"
               onChange={handleChange}
+              id="carNumber"
             />
           </div>
           <div className="flex  items-center">
             <span className="w-[300px]">İstehsal tarixi</span>
-            <Select onChange={handleChange}>
+            <Select onChange={handleChange} id="produceDate">
               <option value="2024">2024</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
@@ -320,6 +328,7 @@ const NewCard = () => {
               type="text"
               className="w-[500px]"
               onChange={handleChange}
+              id="km"
             />
           </div>
           <div className="flex  items-center">
@@ -328,11 +337,12 @@ const NewCard = () => {
               type="text"
               className="w-[500px]"
               onChange={handleChange}
+              id="qostNumber"
             />
           </div>
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">Ödəniş üsulu</span>
-            <Select onChange={handleChange}>
+            <Select onChange={handleChange} id="paymentType">
               <option value="transfer">Köçürülmə</option>
               <option value="cash">Nağd</option>
               <option value="warranty">Qarantiya</option>
@@ -343,7 +353,7 @@ const NewCard = () => {
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">ƏDV</span>
             <input
-              id="checked-checkbox"
+              id="nds"
               type="checkbox"
               value=""
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -353,7 +363,7 @@ const NewCard = () => {
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">Təkrar təmir</span>
             <input
-              id="checked-checkbox"
+              id="repairAgain"
               type="checkbox"
               value=""
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -363,7 +373,7 @@ const NewCard = () => {
           <div className="flex  items-center">
             <span className="text-sm w-[300px]">Servis məlumatı</span>
             <input
-              id="checked-checkbox"
+              id="servisInfo"
               type="checkbox"
               value=""
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -383,11 +393,12 @@ const NewCard = () => {
             rows={4}
             placeholder="Şərh yaz....."
             onChange={handleChange}
+            id="comments"
           />
         </div>
         <div className="border p-5 rounded-md">
           <h2 className="font-semibold mb-5">Məsləhətlər</h2>
-          <Textarea rows={4} onChange={handleChange} />
+          <Textarea rows={4} onChange={handleChange} id="recommendation" />
         </div>
         <div className="flex gap-2 items-center">
           <Button color={"blue"}>Yadda Saxla</Button>
