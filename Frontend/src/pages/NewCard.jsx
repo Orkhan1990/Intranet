@@ -16,7 +16,41 @@ import AddCharges from "../components/AddCharges";
 import { FiPrinter } from "react-icons/fi";
 
 const NewCard = () => {
-  const[formData,setFormData]=useState({})
+  const[formData,setFormData]=useState({
+    clientId:"",
+    type:"",
+    manufactured:"",
+    model:"",
+    sassi:"",
+    carNumber:"",
+    produceDate:"",
+    km:"",
+    qostNumber:"",
+    paymentType:"",
+    nds:false,
+    repairAgain:false,
+    servisInfo:false,
+    comments:"",
+    recommendation:"",
+    problems:[{
+      description:"",
+      workers:[]
+    }],
+    cardWorkers:[{
+      codeOfWork:"",
+      nameOfWork:"",
+      av:0,
+      price:0,
+      discount:0,
+      oil:"",
+      workers:[]
+    }],
+    charges:[{
+      description:"",
+      price:0
+    }]
+
+  })
   const [error, setError] = useState(false);
   const [clients, setClients] = useState([]);
   const [workers, setWorkers] = useState([]);
@@ -24,9 +58,9 @@ const NewCard = () => {
   const [openBobcatWarranty, setOpenBobcatWarranty] = useState(false);
   const [openAmmannWarranty, setOpenAmmannWarranty] = useState(false);
 
-  console.log(clients, workers);
-  console.log(open);
-  console.log(formData);
+  // console.log(clients, workers);
+  // console.log(open);
+  // console.log(formData);
 
   useEffect(() => {
     const getWorkers = async () => {
@@ -86,13 +120,7 @@ const NewCard = () => {
 
 
     setFormData({...formData,[e.target.id]:e.target.value})
-    // if (
-    //   e.target.value === "gedis" ||
-    //   e.target.value === "bobcatWaranty" ||
-    //   e.target.value === "hamannWaranty"
-    // ) {
-    //   setOpen(e.target.checked);
-    // }
+   
   };
   return (
     <div className="min-h-screen m-10 ">
@@ -355,7 +383,7 @@ const NewCard = () => {
             <input
               id="nds"
               type="checkbox"
-              value=""
+              value="nds"
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               onChange={handleChange}
             />
@@ -365,7 +393,7 @@ const NewCard = () => {
             <input
               id="repairAgain"
               type="checkbox"
-              value=""
+              value="repairAgain"
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               onChange={handleChange}
             />
@@ -375,14 +403,14 @@ const NewCard = () => {
             <input
               id="servisInfo"
               type="checkbox"
-              value=""
+              value="servisInfo"
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               onChange={handleChange}
             />
           </div>
         </div>
 
-        <NewCardProblems workers={workers} />
+        <NewCardProblems workers={workers} value={formData.problems} onValueChange={handleChange}/>
         <NewCardWorkers workers={workers} />
         <AddCharges />
         <NewCardAddParts />
