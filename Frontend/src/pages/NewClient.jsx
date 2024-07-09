@@ -9,7 +9,10 @@ const NewClient = () => {
 
 const {currentUser}=useSelector(state=>state.auth);
 
-  console.log(currentUser);
+
+  // console.log(currentUser);
+  console.log(formData);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

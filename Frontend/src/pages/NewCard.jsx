@@ -34,7 +34,9 @@ const NewCard = () => {
     recommendation:"",
     problems:[{
       description:"",
-      workers:[]
+      serviceWorkers:[
+       ""
+      ]
     }],
     cardWorkers:[{
       codeOfWork:"",
@@ -51,6 +53,7 @@ const NewCard = () => {
     }]
 
   })
+  const [childData,setChildData]=useState([]);
   const [error, setError] = useState(false);
   const [clients, setClients] = useState([]);
   const [workers, setWorkers] = useState([]);
@@ -60,7 +63,7 @@ const NewCard = () => {
 
   // console.log(clients, workers);
   // console.log(open);
-  // console.log(formData);
+  console.log(formData);
 
   useEffect(() => {
     const getWorkers = async () => {
@@ -118,10 +121,12 @@ const NewCard = () => {
 
   const handleChange = (e) => {
 
-
     setFormData({...formData,[e.target.id]:e.target.value})
-   
   };
+
+  const handleChildInputChange=(childData)=>{
+    setChildData(childData);
+  }
   return (
     <div className="min-h-screen m-10 ">
       <h2 className="text-center text-lg font-semibold">Yeni kart yarat</h2>
@@ -410,7 +415,7 @@ const NewCard = () => {
           </div>
         </div>
 
-        <NewCardProblems workers={workers} value={formData.problems} onValueChange={handleChange}/>
+        <NewCardProblems workers={workers}  onValueChange={handleChange} value={formData.problems}/>
         <NewCardWorkers workers={workers} />
         <AddCharges />
         <NewCardAddParts />

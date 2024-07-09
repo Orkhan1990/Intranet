@@ -2,6 +2,9 @@ import Client from "../models/clientModel.js"
 import errorHandler from "../utility/errorHandler.js"
 
 export const createClient=async(req,res,next)=>{
+    console.log(req.body);
+    console.log(req.user);
+
     try {
         const newClient=await Client({...req.body,userId:req.user.id});
         newClient.save();

@@ -11,9 +11,9 @@ const newCardProblemsSchema=new mongoose.Schema({
     problem:{
         type:String,
     },
-    workers:[{
+    serviceWorkers:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"client"
+        ref:"users"
     }]
 },{timestamps:true});
 
