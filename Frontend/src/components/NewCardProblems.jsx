@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SelectWithButtons from "../components/SelectWithButtons";
 import { TextInput, Button } from "flowbite-react";
 
-const NewCardProblems = ({workers,onValueChange,value}) => {
+const NewCardProblems = ({workers,value}) => {
   const[inputValues,setInputValues]=useState(value);
 
   console.log(inputValues);
@@ -11,15 +11,19 @@ const NewCardProblems = ({workers,onValueChange,value}) => {
       serviceWorkers:[]}])
   };
  
-
+ const handleChangeValue=(event,index)=>{
+         const newArray=[...inputValues];
+         newArray[index].description=event.target.value;
+         setInputValues(newArray);
+ }
  
   return (
     <div className="border p-5 rounded-md">
       <h2>Problemlər</h2>
       {inputValues.map((input, index) => (
         <div className="flex gap-[250px] mt-2" key={index}>
-          <TextInput type="text" className="w-[500px]" id="decription" value={input.description} onChange={onValueChange}/>
-          <SelectWithButtons workers={workers} onValueChange={onValueChange} value={input.serviceWorkers} />
+          <TextInput type="text" className="w-[500px]" id="description" defaultValue={input.description} onChange={(e)=>handleChangeValue(e,index)}/>
+          <SelectWithButtons workers={workers}  value={input.serviceWorkers} />
         </div>
       ))}
       <div className="flex gap-5">

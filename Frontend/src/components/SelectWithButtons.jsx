@@ -1,7 +1,7 @@
 import { Select } from "flowbite-react";
 import React, { useState } from "react";
 
-const SelectWithButtons = ({workers,onValueChange,value}) => {
+const SelectWithButtons = ({workers,value}) => {
        const[selectValues,setSelectValues]=useState(value);
        console.log(value);
 
@@ -14,6 +14,13 @@ const SelectWithButtons = ({workers,onValueChange,value}) => {
     setSelectValues(newForm.splice(index,1));
    
   };
+  const handleChange=(e,index)=>{
+      const newArray=[...selectValues];
+      newArray[index].value=e.target.value;
+      setSelectValues(newArray);
+  }
+
+
   return (
     <div  className="flex flex-col gap-4">
       {selectValues.map((selectValue, index) => (
@@ -31,7 +38,7 @@ const SelectWithButtons = ({workers,onValueChange,value}) => {
           }
          
         <Select className="w-[250px]" key={index} id="workers" value={
-          selectValue} onChange={onValueChange} >
+          selectValue} onChange={(e,index)=>handleChange(e,index)} >
           <option value="">İsciler</option>
           {
             workers&&workers.map((worker,index)=>(

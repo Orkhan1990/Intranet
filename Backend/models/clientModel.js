@@ -49,11 +49,11 @@ const clientSchema=new mongoose.Schema({
     },
     type:{
         type:String,
-        required:true
+        default:"customer"
     },
     typeOfStatus:{
         type:String,
-        required:true
+        default:"phisical"
     },
     av:{
         type:Number,

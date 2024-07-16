@@ -21,9 +21,11 @@ const newCardSchema = new mongoose.Schema(
 
     type: {
       type: String,
+      default:"tiqac"
     },
     manufactured: {
       type: String,
+      default:"man"
     },
     model: {
       type: String,
@@ -36,6 +38,7 @@ const newCardSchema = new mongoose.Schema(
     },
     produceDate: {
       type: String,
+      default:"2024"
     },
     km: {
       type: String,
@@ -45,6 +48,7 @@ const newCardSchema = new mongoose.Schema(
     },
     paymentType: {
       type: String,
+      default:"transfer"
     },
     nds: {
       type: Boolean,

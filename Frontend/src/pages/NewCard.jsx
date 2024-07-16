@@ -35,7 +35,7 @@ const NewCard = () => {
     problems:[{
       description:"",
       serviceWorkers:[
-       ""
+       {value:""}
       ]
     }],
     cardWorkers:[{

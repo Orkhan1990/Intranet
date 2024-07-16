@@ -89,8 +89,8 @@ const ClientList = () => {
             </Table.Cell>
             <Table.Cell><input onBlur={()=>handleSubmit(item._id)} type="text" id="av" onChange={handleChange} className="border border-black outline-none w-10 p-1" defaultValue={item.av}/></Table.Cell>
             <Table.Cell><input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="border border-black outline-none w-10 p-1" defaultValue={item.partsDiscount}/></Table.Cell>
-            <Table.Cell><input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="border border-black outline-none w-10 p-1" defaultValue={item.av}/></Table.Cell>
-            <Table.Cell><input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="border border-black outline-none w-10 p-1" defaultValue={item.av}/></Table.Cell>
+            <Table.Cell><input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="border border-black outline-none w-10 p-1" defaultValue={item.partsDiscount}/></Table.Cell>
+            <Table.Cell><input onBlur={()=>handleSubmit(item._id)} type="text" id="partsDiscount" onChange={handleChange} className="border border-black outline-none w-10 p-1" defaultValue={item.partsDiscount}/></Table.Cell>
             <Table.Cell>
               <Link to={`/updateClient/${item._id}`} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                 Edit
