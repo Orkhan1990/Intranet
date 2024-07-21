@@ -1,63 +1,29 @@
 import { Select } from "flowbite-react";
-import React, { useState } from "react";
+import React from "react";
 
-const SelectWithButtons = ({workers,value}) => {
-       const[selectValues,setSelectValues]=useState(value);
-       console.log(value);
+const SelectWithButtons = ({ workers, name, value, onChange }) => {
 
-  const incrementSelectCount = () => {
-    setSelectValues([...selectValues,""]);
-  };
-
-  const decrementSelectCount = (index) => {
-    const newForm=[...selectValues];
-    setSelectValues(newForm.splice(index,1));
-   
-  };
-  const handleChange=(e,index)=>{
-      const newArray=[...selectValues];
-      newArray[index].value=e.target.value;
-      setSelectValues(newArray);
+  const handleChange=(event)=>{
+    onChange(event.target.value)
   }
-
-
   return (
-    <div  className="flex flex-col gap-4">
-      {selectValues.map((selectValue, index) => (
-        <div className="flex gap-4 items-center">
-          
-          {
-            index==0?"":(
-              <span
-              className="text-[25px] cursor-pointer"
-              onClick={()=>decrementSelectCount(index)}
-            >
-              -
-            </span>
-            )
-          }
-         
-        <Select className="w-[250px]" key={index} id="workers" value={
-          selectValue} onChange={(e,index)=>handleChange(e,index)} >
-          <option value="">İsciler</option>
-          {
-            workers&&workers.map((worker,index)=>(
-              <option value={worker._id} key={index}>{worker.firstName+" "+worker.lastName}</option>
-            ))
-          }
-        </Select>
-        <span
-        className="text-[25px] cursor-pointer"
-        onClick={incrementSelectCount}
+    <div className="flex flex-col gap-4">
+      <Field
+        as={Select}
+        name={name}
+        value={value}
+        className="w-[250px]"
+        onChange={handleChange}
       >
-        +
-      </span>
-        </div>
-      ))}
-      </div>
-
-    
-  
+        <option value="">İsciler</option>
+        {workers &&
+          workers.map((worker, index) => (
+            <option value={worker._id} key={index}>
+              {worker.firstName + " " + worker.lastName}
+            </option>
+          ))}
+      </Field>
+    </div>
   );
 };
 

@@ -60,3 +60,8 @@
 .show{
   display: block;
 }
+
+
+.text-gray-500{
+  color:red !important
+}

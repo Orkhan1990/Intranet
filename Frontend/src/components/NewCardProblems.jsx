@@ -1,35 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import SelectWithButtons from "../components/SelectWithButtons";
-import { TextInput, Button } from "flowbite-react";
+import { Field,FieldArray } from "formik";
+import { TextInput } from "flowbite-react";
 
-const NewCardProblems = ({workers,value}) => {
-  const[inputValues,setInputValues]=useState(value);
-
-  console.log(inputValues);
-  const incrementCount = () => {
-    setInputValues([...inputValues,{description:"",
-      serviceWorkers:[]}])
-  };
- 
- const handleChangeValue=(event,index)=>{
-         const newArray=[...inputValues];
-         newArray[index].description=event.target.value;
-         setInputValues(newArray);
- }
- 
+const NewCardProblems = ({ workers, name, values, setFieldValue }) => {
   return (
-    <div className="border p-5 rounded-md">
-      <h2>Problemlər</h2>
-      {inputValues.map((input, index) => (
-        <div className="flex gap-[250px] mt-2" key={index}>
-          <TextInput type="text" className="w-[500px]" id="description" defaultValue={input.description} onChange={(e)=>handleChangeValue(e,index)}/>
-          <SelectWithButtons workers={workers}  value={input.serviceWorkers} />
-        </div>
-      ))}
-      <div className="flex gap-5">
-        <Button color="blue" className="mt-5" onClick={incrementCount}>
-          Əlavə et <span className="ml-2 ">+</span>
-        </Button>
+    <div>
+      <div className="flex gap-[250px] mt-2">
+        <Field
+          as={TextInput}
+          type="text"
+          className="w-[500px]"
+          name={`${name}.description`}
+        />
+        <FieldArray name={`${name}.serviceWorkers`}>
+          {({ push, remove }) => (
+            <>
+              {values.serviceWorkers.map((_,index) => (
+                <div key={index}>
+                  <SelectWithButtons
+                   name={`${name}.serviceWorkers[${index}]`}
+                   value={values.serviceWorkers[index]}
+                   onChange={(value)=>setFieldValue(`${name}.serviceWorkers[${index}]`,value)}
+                   workers={workers}
+                  />
+                </div>
+              ))}
+            </>
+          )}
+        </FieldArray>
       </div>
     </div>
   );
