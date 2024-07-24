@@ -57,7 +57,7 @@ const newCardInitialValues = {
       price: 0,
       discount: 0,
       oil: "",
-      workers: [],
+      jobWorkers: [""],
     },
   ],
   expences: [

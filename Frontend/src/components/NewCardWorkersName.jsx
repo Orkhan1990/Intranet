@@ -1,7 +1,8 @@
 import { TextInput,Select, Button } from "flowbite-react";
+import { Field } from "formik";
 import React, {  useState } from "react";
 
-const NewCardWorkersName = ({workers}) => {
+const NewCardWorkersName = ({workers,name,value,onChange,index,push,remove}) => {
  
 
 
@@ -11,12 +12,13 @@ const NewCardWorkersName = ({workers}) => {
         <div className="flex gap-4 items-center">
           <Button
           color={"blue"}
+          onClick={()=>remove(index)}
           >
             -
           </Button>
           <div className="flex gap-2 w-[200px]">
-            <TextInput type="text" className="w-[70px]" />
-            <Select className="w-[250px]" >
+            <Field as={TextInput} type="text" className="w-[70px]" />
+            <Select className="w-[250px]" name={`${name}.jobWorkers`}>
               <option value="">İşçilər</option>
             {
               workers&&workers.map((worker,index)=>(
@@ -31,6 +33,7 @@ const NewCardWorkersName = ({workers}) => {
 
           <Button
           color={"blue"}
+          onClick={()=>push("")}
           >
             +
           </Button>
