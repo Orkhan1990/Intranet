@@ -62,6 +62,10 @@
 }
 
 
-.text-gray-500{
+.errorMessage{
   color:red !important
 }
+
+/* .text-gray-500{
+  color:red !important
+} */

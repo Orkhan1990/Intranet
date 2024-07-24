@@ -15,7 +15,7 @@ import NewCardWorkers from "../components/NewCardWorkers";
 import NewCardAddParts from "../components/NewCardAddParts";
 import AddCharges from "../components/AddCharges";
 import { FiPrinter } from "react-icons/fi";
-import { Formik, Form, Field, ErrorMessage,FieldArray } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 
 const types = [
@@ -69,7 +69,6 @@ const newCardInitialValues = {
 };
 
 const NewCard = () => {
- 
   const [error, setError] = useState(false);
   const [clients, setClients] = useState([]);
   const [workers, setWorkers] = useState([]);
@@ -131,7 +130,6 @@ const NewCard = () => {
     getClients();
   }, []);
 
- 
   const onSubmit = (values, props) => {
     console.log(values);
   };
@@ -139,7 +137,7 @@ const NewCard = () => {
     <div className="min-h-screen m-10 ">
       <h2 className="text-center text-lg font-semibold">Yeni kart yarat</h2>
       <Formik initialValues={newCardInitialValues} onSubmit={onSubmit}>
-        {({values, setFieldValue} ) => (
+        {({ values, setFieldValue }) => (
           <Form className="mt-10 flex flex-col gap-5 text-sm">
             <div className="border rounded-md p-5">
               <div className="flex items-center gap-10">
@@ -168,6 +166,9 @@ const NewCard = () => {
                 </Link>
               </div>
             </div>
+
+            {/* ------------------------------------------------------------------------------------------------ */}
+            {/* WARRANTY SECTION */}
             <div className="border p-5 rounded-md">
               <h2>Gediş</h2>
               <div className="flex gap-4">
@@ -419,6 +420,8 @@ const NewCard = () => {
               </div>
             </div>
 
+            {/* -------------------------------------------------------------------------------------------- */}
+            {/* PROBLEM SECTION */}
             <FieldArray name="problems">
               {({ push, remove }) => (
                 <>
@@ -432,19 +435,78 @@ const NewCard = () => {
                           values={values.problems[index]}
                           setFieldValue={setFieldValue}
                         />
-                        <div className="flex gap-5">
-                          <Button color="blue" type="button" className="mt-5" onClick={()=>push({description:'',serviceWorkers: [""]})}>
-                            Əlavə et <span className="ml-2 ">+</span>
-                          </Button>
-                        </div>
                       </div>
                     </div>
                   ))}
+                  <div className="flex gap-5">
+                    <Button
+                      color="blue"
+                      type="button"
+                      className="mt-5"
+                      onClick={() =>
+                        push({ description: "", serviceWorkers: [""] })
+                      }
+                    >
+                      Əlavə et <span className="ml-2 ">+</span>
+                    </Button>
+                  </div>
                 </>
               )}
             </FieldArray>
 
-            <NewCardWorkers workers={workers} />
+            {/* -----------------------------------------------------------------------------------------          */}
+            {/* JOBS SECTION */}
+            <FieldArray name="jobs">
+              {({ push, remove }) => (
+                <div className="border p-5 rounded-md  overflow-x-scroll">
+                  <h2 className="mb-4">İşçilik</h2>
+                  <Table>
+                    <Table.Head>
+                      <Table.HeadCell>İşin kodu (MAN)</Table.HeadCell>
+                      <Table.HeadCell>İşin adı</Table.HeadCell>
+                      <Table.HeadCell>AV</Table.HeadCell>
+                      <Table.HeadCell>Qiymət</Table.HeadCell>
+                      <Table.HeadCell>Endirim(%)</Table.HeadCell>
+                      <Table.HeadCell>Yağ</Table.HeadCell>
+                      <Table.HeadCell>Görüldü</Table.HeadCell>
+                    </Table.Head>
+                    {values.jobs.map((_, index) => (
+                      <NewCardWorkers
+                        workers={workers}
+                        name={`jobs[${index}]`}
+                        values={values.jobs[index]}
+                        index={index}
+                        setFieldValue={setFieldValue}
+                      />
+                    ))}
+                  </Table>
+                  <div className="flex  gap-2 mt-5 items-center justify-center">
+                    <h2 className="font-bold">Cəmi:</h2>
+                    <span className="font-semibold">0 AZN</span>
+                  </div>
+
+                  <div className="flex gap-5">
+                    <Button
+                      color="blue"
+                      className="mt-5"
+                      onClick={() =>
+                        push({
+                          code: "",
+                          name: "",
+                          av: 0,
+                          price: 0,
+                          discount: 0,
+                          oil: "",
+                          workers: [""],
+                        })
+                      }
+                    >
+                      Əlavə et <span className="ml-2 ">+</span>
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </FieldArray>
             <AddCharges />
             <NewCardAddParts />
 

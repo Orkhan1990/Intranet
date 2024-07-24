@@ -9,7 +9,13 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+   
+    extend: {
+    colors:{
+      "errorColor":"#FF0000 !important" 
+    }
+    }
+
   },
   plugins: [
     'flowbite/plugin',

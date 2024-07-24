@@ -116,7 +116,7 @@ const SignInn = () => {
           >
             {(props) => (
               <Form className="flex flex-col gap-3 mt-5">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 ">
                   <Label
                     htmlFor="username"
                     value="İstifadəçi adı"
@@ -127,9 +127,8 @@ const SignInn = () => {
                     name="username"
                     placeholder="İstifadəçi adı"
                     as={TextInput}
-                    helperText={<ErrorMessage name="username" className="errorMessage"/>}
                   />
-                  
+                  {props.errors.username&& (<p className="text-sm text-red-700">{props.errors.username}</p>)}
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label
@@ -141,9 +140,9 @@ const SignInn = () => {
                   as={TextInput} 
                   type="password"
                    name="password"
-                   helperText={<ErrorMessage name="password" className="text-red-700"/>}
                    />
-                  
+                {props.errors.password&& (<p className="text-sm text-red-700">{props.errors.password}</p>)}
+
                 </div>
                 <Button type="submit" disabled={props.isSubmitting}>Daxil ol</Button>
               </Form>
