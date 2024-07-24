@@ -1,13 +1,15 @@
-import { Select } from "flowbite-react";
+import { Button, Select } from "flowbite-react";
 import React from "react";
+import {Field} from "formik";
 
-const SelectWithButtons = ({ workers, name, value, onChange }) => {
+const SelectWithButtons = ({ workers, name, value, onChange,push,remove,index }) => {
 
   const handleChange=(event)=>{
     onChange(event.target.value)
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex  gap-2">
+     {index>0&& <Button color={"blue"} onClick={()=>remove(index)} >-</Button>} 
       <Field
         as={Select}
         name={name}
@@ -23,6 +25,7 @@ const SelectWithButtons = ({ workers, name, value, onChange }) => {
             </option>
           ))}
       </Field>
+      <Button color={"blue"} onClick={()=>push('')}>+</Button>
     </div>
   );
 };

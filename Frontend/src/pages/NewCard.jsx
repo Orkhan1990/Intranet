@@ -46,7 +46,7 @@ const newCardInitialValues = {
   problems: [
     {
       description: "",
-      serviceWorkers: [],
+      serviceWorkers: [""],
     },
   ],
   jobs: [
@@ -433,7 +433,7 @@ const NewCard = () => {
                           setFieldValue={setFieldValue}
                         />
                         <div className="flex gap-5">
-                          <Button color="blue" type="button" className="mt-5" onClick={()=>push({description:'',serviceWorkers: []})}>
+                          <Button color="blue" type="button" className="mt-5" onClick={()=>push({description:'',serviceWorkers: [""]})}>
                             Əlavə et <span className="ml-2 ">+</span>
                           </Button>
                         </div>

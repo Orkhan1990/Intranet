@@ -1,7 +1,7 @@
 import React from "react";
 import SelectWithButtons from "../components/SelectWithButtons";
 import { Field,FieldArray } from "formik";
-import { TextInput } from "flowbite-react";
+import { Button, TextInput } from "flowbite-react";
 
 const NewCardProblems = ({ workers, name, values, setFieldValue }) => {
   return (
@@ -13,20 +13,25 @@ const NewCardProblems = ({ workers, name, values, setFieldValue }) => {
           className="w-[500px]"
           name={`${name}.description`}
         />
-        <FieldArray name={`${name}.serviceWorkers`}>
+        <FieldArray name={`${name}.serviceWorkers`} className="flex flex-col">
           {({ push, remove }) => (
-            <>
+            <div className="flex flex-col gap-5  items-center">
               {values.serviceWorkers.map((_,index) => (
-                <div key={index}>
+                <div key={index}  >
+                  
                   <SelectWithButtons
                    name={`${name}.serviceWorkers[${index}]`}
                    value={values.serviceWorkers[index]}
                    onChange={(value)=>setFieldValue(`${name}.serviceWorkers[${index}]`,value)}
                    workers={workers}
+                   push={push}
+                   remove={remove}
+                   index={index} 
+                  
                   />
                 </div>
               ))}
-            </>
+            </div>
           )}
         </FieldArray>
       </div>
