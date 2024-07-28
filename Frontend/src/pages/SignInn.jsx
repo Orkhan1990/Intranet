@@ -128,7 +128,7 @@ const SignInn = () => {
                     placeholder="İstifadəçi adı"
                     as={TextInput}
                   />
-                  {props.errors.username&& (<p className="text-sm text-red-700">{props.errors.username}</p>)}
+                  {props.errors.username&& (<p className="text-sm text-red-500">{props.errors.username}</p>)}
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label
@@ -141,7 +141,7 @@ const SignInn = () => {
                   type="password"
                    name="password"
                    />
-                {props.errors.password&& (<p className="text-sm text-red-700">{props.errors.password}</p>)}
+                {props.errors.password&& (<p className="text-sm text-red-500">{props.errors.password}</p>)}
 
                 </div>
                 <Button type="submit" disabled={props.isSubmitting}>Daxil ol</Button>

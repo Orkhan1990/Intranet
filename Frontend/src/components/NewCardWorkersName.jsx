@@ -2,9 +2,9 @@ import { TextInput,Select, Button } from "flowbite-react";
 import { Field } from "formik";
 import React, {  useState } from "react";
 
-const NewCardWorkersName = ({workers,name,value,onChange,index,push,remove}) => {
+const NewCardWorkersName = ({workers,name,value,index,push,remove}) => {
  
-
+ 
 
   return (
     <div className=" flex flex-col gap-2">
@@ -17,8 +17,9 @@ const NewCardWorkersName = ({workers,name,value,onChange,index,push,remove}) => 
             -
           </Button>
           <div className="flex gap-2 w-[200px]">
-            <Field as={TextInput} type="text" className="w-[70px]" />
-            <Select className="w-[250px]" name={`${name}.jobWorkers`}>
+            <Field as={TextInput} type="text" className="w-[70px]" name={`${name}.workerAv`} />
+            <Field as={Select} className="w-[250px]" name={`${name}.workerId`}  
+            >
               <option value="">İşçilər</option>
             {
               workers&&workers.map((worker,index)=>(
@@ -27,13 +28,13 @@ const NewCardWorkersName = ({workers,name,value,onChange,index,push,remove}) => 
              
               ))
             }
-             </Select>
+             </Field>
            
           </div>
 
           <Button
           color={"blue"}
-          onClick={()=>push("")}
+          onClick={()=>push({workerAv:"",workerId:""})}
           >
             +
           </Button>

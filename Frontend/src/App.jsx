@@ -10,6 +10,7 @@ import NewClient from "./pages/NewClient";
 import ClientList from "./pages/ClientList";
 import UpdateClient from "./pages/UpdateClient";
 import SignInn from "./pages/SignInn";
+import Orders from "./pages/Orders";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route path="/newClient" element={<Layout><NewClient/></Layout>} />
           <Route path="/clientList" element={<Layout><ClientList/></Layout>} />
           <Route path="/updateClient/:id" element={<Layout><UpdateClient/></Layout>} />
+          <Route path="/orders" element={<Layout><Orders/></Layout>} />
+
         </Route>
         <Route path="*" element={<NoPage />} />
         <Route path="/sign-in" element={<SignInn />} />

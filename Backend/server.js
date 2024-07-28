@@ -46,9 +46,9 @@ app.use((error, req, res, next) => {
   });
 });
 
-mongoose.connect(process.env.MONGODB).then(() => {
-  console.log("MongoDb connected!!!");
-});
+// mongoose.connect(process.env.MONGODB).then(() => {
+//   console.log("MongoDb connected!!!");
+// });
 
 app.listen(port, () => {
   console.log(`Server is runing on ${port}`);

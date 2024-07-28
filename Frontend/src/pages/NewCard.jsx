@@ -57,7 +57,7 @@ const newCardInitialValues = {
       price: 0,
       discount: 0,
       oil: "",
-      jobWorkers: [""],
+      jobWorkers: [{ workerAv: "", workerId: "" }],
     },
   ],
   expences: [
@@ -497,7 +497,7 @@ const NewCard = () => {
                           price: 0,
                           discount: 0,
                           oil: "",
-                          workers: [""],
+                          jobWorkers: [{ workerAv: "", workerId: "" }],
                         })
                       }
                     >
@@ -507,7 +507,31 @@ const NewCard = () => {
                 </div>
               )}
             </FieldArray>
-            <AddCharges />
+
+            {/* ---------------------------------------------------------------------------------------------- */}
+            {/*EXPENCES*/}
+
+            <FieldArray name="expences">
+              {({ push, remove }) => (
+                <>
+                  {values.expences.map((_, index) => (
+                    <AddCharges name={`expences[${index}]`} />
+                  ))}
+                  <div className="flex gap-2 items-center font-semibold justify-end ">
+                    <span>Cəmi:</span>
+                    <span>0 AZN</span>
+                  </div>
+                  <div>
+                    <Button
+                      color="blue"
+                      onClick={() => push({ description: "", price: "" })}
+                    >
+                      Əlavə et <span className="ml-2 ">+</span>
+                    </Button>
+                  </div>
+                </>
+              )}
+            </FieldArray>
             <NewCardAddParts />
 
             <div className="border p-5 rounded-md">

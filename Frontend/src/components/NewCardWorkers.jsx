@@ -65,7 +65,7 @@ const NewCardWorkers = ({ workers, values, name,setFieldValue }) => {
         <Table.Cell>
           <FieldArray name={`${name}.jobWorkers`}>
             {({ push, remove }) => (
-              <>
+              <div className="flex flex-col gap-2">
                 {values.jobWorkers.map((_, index) => (
                   <NewCardWorkersName
                     workers={workers}
@@ -74,10 +74,10 @@ const NewCardWorkers = ({ workers, values, name,setFieldValue }) => {
                     index={index}
                     push={push}
                     remove={remove}
-                    onChange={(value)=>setFieldValue(`${name}.jobWorkers[${index}]`,value)}
+
                     />
                 ))}
-              </>
+              </div>
             )}
           </FieldArray>
         </Table.Cell>
