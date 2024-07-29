@@ -29,9 +29,10 @@ const {currentUser}=useSelector(state=>state.auth);
       
       const data=await res.json();
        if(!res.ok||data.success===false){
-        setError(data.message)
+        setError(data.message.sqlMessage)
         setSuccess("")
        }
+       console.log(data);
        if(res.ok){
          setSuccess(`${data.companyName} şirkəti yaradıldı`);
          setError("")

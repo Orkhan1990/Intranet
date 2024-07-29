@@ -10,32 +10,25 @@ export const signIn = async (req, res, next) => {
     db.query(q,[username],(err,data)=>{
       console.log(data);
       if(err){
-        return next(errorHandler(401,err))
+        next(errorHandler(401,err));
+        return;
       }
       if(data.length===0){
         next(errorHandler(401,"Belə bir istifadəçi yoxdur!!"));
         return;
       }
-      const isMatchPassword=bcrypt.compareSync(password,data.password);
+      const isMatchPassword=bcrypt.compareSync(password,data[0].password);
       if(!isMatchPassword){
         return next(errorHandler(401,"Şifrə uyğun deyil!!"));
       }
-      const token= jwtToken.sign({id:data.id,isAdmin:data.isAdmin},process.env.JWT_SECRET);
-    const{password:pass,...rest}=data;
+      const token= jwtToken.sign({id:data[0].id,isAdmin:data[0].isAdmin},process.env.JWT_SECRET);
+    const{password:pass,...rest}=data[0];
     res.cookie("access_token",token,{httpOnly:true});
 
    res.status(200).json(rest);
 
     })
-    // if(!user){
-    //     return next(errorHandler(401,"Belə bir istifadəçi yoxdur!!"));
-    // }
-
-    // const isMatchPassword=bcrypt.compareSync(password,user.password);
-    
-     
-    
-
+   
   } catch (error) {
     next(errorHandler(401,error.message));
   }
