@@ -32,9 +32,9 @@ const {currentUser}=useSelector(state=>state.auth);
         setError(data.message.sqlMessage)
         setSuccess("")
        }
-       console.log(data);
+      //  console.log(data);
        if(res.ok){
-         setSuccess(`${data.companyName} şirkəti yaradıldı`);
+         setSuccess(`${formData.companyName} şirkəti yaradıldı`);
          setError("")
        }
 

@@ -3,8 +3,6 @@ import Client from "../models/clientModel.js";
 import errorHandler from "../utility/errorHandler.js";
 
 export const createClient = async (req, res, next) => {
-  console.log(req.body);
-  console.log(req.user);
 
   try {
     const q =
@@ -28,6 +26,7 @@ export const createClient = async (req, res, next) => {
         next(errorHandler(401, err));
         return;
       }
+      console.log(data);
       if (data) {
         res.status(201).json(data);
         return;
@@ -41,11 +40,22 @@ export const createClient = async (req, res, next) => {
 
 export const getClients = async (req, res, next) => {
   try {
-    const clients = await Client.find();
-    if (!clients) {
-      return next(errorHandler(401, "Users not exist"));
-    }
-    res.status(200).json(clients);
+
+
+    const q="SELECT * FROM clients";
+    db.query(q,(err,data)=>{
+      if(err){
+        next(errorHandler(401,err));
+        return;
+      }
+      if(data.length===0){
+       next(errorHandler(401, "Clients not exist"));
+       return ;
+      }
+      console.log(data);
+          res.status(200).json(data);
+    })
+   
   } catch (error) {
     next(errorHandler(401, error.message));
   }
@@ -55,16 +65,28 @@ export const addDiscount = async (req, res, next) => {
   const { id } = req.params;
   console.log(id, req.body);
   try {
-    const client = await Client.findById(id);
-    if (!client) {
-      return next(errorHandler(401, "Client not exist!"));
-    }
-    const updateClient = await Client.findByIdAndUpdate(
-      id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.status(201).json(updateClient);
+
+
+    const q="UPDATE  clients SET av=?,partsDiscount=? WHERE id=?"
+
+    db.query(q,[req.body.av,req.body.partsDiscount,id],(err,data)=>{
+      if(err){
+        next(errorHandler(401,err));
+        return;
+      }
+      console.log(data);
+      res.status(201).json(data)
+    })
+    // const client = await Client.findById(id);
+    // if (!client) {
+    //   return next(errorHandler(401, "Client not exist!"));
+    // }
+    // const updateClient = await Client.findByIdAndUpdate(
+    //   id,
+    //   { $set: req.body },
+    //   { new: true }
+    // );
+    // res.status(201).json(updateClient);
   } catch (error) {
     next(errorHandler(401, error.message));
   }
@@ -72,13 +94,23 @@ export const addDiscount = async (req, res, next) => {
 
 export const getClient = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
+  
   try {
-    const client = await Client.findById(id);
-    if (!client) {
-      return next(errorHandler(401, "Client not exist!"));
-    }
-    res.status(200).json(client);
+    const q="SELECT * FROM clients WHERE id=?";
+    
+    db.query(q,[id],(err,data)=>{
+      if(err){
+        next(401,errorHandler(401,err));
+        return;
+      }
+      console.log(data);
+      if(data.length===0){
+        next(401,errorHandler(401,"Client not exist"));
+        return;
+      }
+      res.status(201).json(data[0]);
+    })
+  
   } catch (error) {
     next(errorHandler(401, error.message));
   }
