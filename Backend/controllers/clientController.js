@@ -77,16 +77,7 @@ export const addDiscount = async (req, res, next) => {
       console.log(data);
       res.status(201).json(data)
     })
-    // const client = await Client.findById(id);
-    // if (!client) {
-    //   return next(errorHandler(401, "Client not exist!"));
-    // }
-    // const updateClient = await Client.findByIdAndUpdate(
-    //   id,
-    //   { $set: req.body },
-    //   { new: true }
-    // );
-    // res.status(201).json(updateClient);
+   
   } catch (error) {
     next(errorHandler(401, error.message));
   }
