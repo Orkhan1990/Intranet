@@ -61,7 +61,7 @@ const UpdateClient = () => {
         setSuccess("")
        }
        if(res.ok){
-         setSuccess(`${data.companyName} şirkətinin məlumatı yeniləndi`);
+         setSuccess(`${formData.companyName} şirkətinin məlumatı yeniləndi`);
          setError("")
        }
 
@@ -111,7 +111,7 @@ const UpdateClient = () => {
               placeholder="Telefon nömrəsi"
               required
               onChange={handleChange}
-              value={formData.companyRepresentative}
+              value={formData.phoneNumber       }
 
             />
           </div>

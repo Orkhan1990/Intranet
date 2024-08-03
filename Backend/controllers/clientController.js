@@ -110,12 +110,18 @@ export const getClient = async (req, res, next) => {
 export const updateClient = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const updateClientData = await Client.findByIdAndUpdate(
-      id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.status(201).json(updateClientData);
+
+    const q="UPDATE clients SET ? WHERE id=?";
+
+    db.query(q,[req.body,id],(err,data)=>{
+        if(err){
+          next(errorHandler(401,err));
+          return;
+        }
+        console.log(data);
+        res.status(201).json(data);
+    })
+  
   } catch (error) {
     next(errorHandler(401, error.message));
   }
