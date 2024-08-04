@@ -10,14 +10,14 @@ const PartsList = ({index,values,name,push,remove}) => {
       {index+1}
     </Table.Cell>
     <Table.Cell>
-    <Field as={TextInput} type="text" />
+    <Field as={TextInput} type="text" name={`${name}.partNumber`}/>
     </Table.Cell>
     <Table.Cell>
-    <Field as={TextInput} type="text" />
+    <Field as={TextInput} type="text" name={`${name}.count`}/>
     </Table.Cell>
     <Table.Cell></Table.Cell>
     <Table.Cell>
-    <Field as={TextInput} type="text" />
+    <Field as={TextInput} type="text" name={`${name}.partName`}/>
     </Table.Cell>
     <Table.Cell>
     <Button color={"blue"} onClick={()=>index>0&&remove(index)}>-</Button>
@@ -34,9 +34,3 @@ const PartsList = ({index,values,name,push,remove}) => {
 
 export default PartsList
 
-{/* <div className="flex gap-2 h-[50px] ">
-<Button color={"blue"} onClick={()=>push({partNumber,count,partName})}>-</Button>
-<Button color={"blue"}>+</Button>
-<Button color={"blue"}>Anbardan yoxla</Button>
-
-</div> */}

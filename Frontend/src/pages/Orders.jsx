@@ -8,7 +8,7 @@ import {
 } from "flowbite-react";
 import { Field, FieldArray, Form, Formik } from "formik";
 import PartsList from "../components/PartsList";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const orderInitialValues = {
   project: "",
@@ -18,10 +18,10 @@ const orderInitialValues = {
   manufacturer: "",
   model: "",
   sassiNumber: "",
-  carNumber: "",
+  engineNumber: "",
   productionDate: "",
   km: "",
-  qostNumber: "",
+  carNumber: "",
   payment: "",
   deliverPeriod: "",
   deliverType: "",
@@ -37,11 +37,43 @@ const orderInitialValues = {
   ],
 };
 
-const years=["2024","2023","2022","2021","2020","2019","2018"]
+const years = ["2024", "2023", "2022", "2021", "2020", "2019", "2018"];
+const manufacturers=["Man","Ford","Terex","Gates","Sumitomo","Bobcat"]
+
 const Orders = () => {
+  const [clients, setClients] = useState([]);
+  const [error, setError] = useState("");
+
   const onSubmit = (props, values) => {
     console.log(values);
   };
+
+  useEffect(() => {
+    const getClients = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost:3004/api/v1/client/getClients",
+          {
+            method: "GET",
+            credentials: "include", // added this part
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await res.json();
+        if (!res.ok || data.success === false) {
+          setError(data.message);
+        }
+        setClients(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    getClients();
+  }, []);
 
   return (
     <div className="p-5">
@@ -64,7 +96,7 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 Kart nömrəsi
               </label>
-              <Field as={Select} className="w-[200px]">
+              <Field as={Select} className="w-[200px]" name="cardNumber">
                 <option value=""></option>
                 <option value="555555">555555</option>
               </Field>
@@ -73,7 +105,7 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 Sifariş növü
               </label>
-              <Field as={Select} className="w-[200px]">
+              <Field as={Select} className="w-[200px]" name="orderType">
                 <option value="standart">Standart(müştəri)</option>
                 <option value="localMarket">Yerli bazar</option>
                 <option value="stok">Anbar</option>
@@ -83,70 +115,73 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 Müştəri
               </label>
-              <Field as={Select} className="w-[200px]">
-                <option value="standart">İmprotex</option>
-                <option value="localMarket">Avrora</option>
-                <option value="stok">Zqan</option>
+              <Field as={Select} className="w-[200px]" name="client">
+                {
+                    clients.map((client,index)=>(
+                        <option value={client.id} key={index}>{client.companyName}</option>
+
+                    ))
+                }
               </Field>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 İstehsalçı
               </label>
-              <Field as={Select} className="w-[200px]">
-                <option value="standart">Man</option>
-                <option value="localMarket">Terex</option>
-                <option value="stok">Gates</option>
+              <Field as={Select} className="w-[200px]" name="manufacturer">
+                {
+                    manufacturers.map((manufacturer,index)=>(
+                        <option value={manufacturer} key={index}>{manufacturer}</option>
+
+                    ))
+                }
               </Field>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 Model
               </label>
-              <Field as={TextInput} type="text" className="w-[400px]" />
+              <Field as={TextInput} type="text" className="w-[400px]" name="model" />
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 Şassi nömrəsi
               </label>
-              <Field as={TextInput} type="text" className="w-[400px]" />
+              <Field as={TextInput} type="text" className="w-[400px]" name="sassiNumber"/>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
-                Maşın nömrəsi
+                Mator nömrəsi
               </label>
-              <Field as={TextInput} type="text" className="w-[400px]" />
+              <Field as={TextInput} type="text" className="w-[400px]" name="engineNumber"/>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 İstehsal tarixi
               </label>
-              <Field as={Select} className="w-[200px]">
-                {
-                    years.map((year,index)=>(
-                        <option value={year}>{year}</option>
-                    ))
-                }
-               
+              <Field as={Select} className="w-[200px]" name="productionDate">
+                {years.map((year, index) => (
+                  <option value={year} key={index}>{year}</option>
+                ))}
               </Field>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 Yürüş/saat
               </label>
-              <Field as={TextInput} type="text" className="w-[400px]" />
+              <Field as={TextInput} type="text" className="w-[400px]" name="km"/>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
-                Lisenziya nömrəsi
+                Maşın  nömrəsi
               </label>
-              <Field as={TextInput} type="text" className="w-[400px]" />
+              <Field as={TextInput} type="text" className="w-[400px]" name="carNumber" />
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 Ödəniş üsulu
               </label>
-              <Field as={Select} className="w-[200px]">
+              <Field as={Select} className="w-[200px]" name="payment">
                 <option value="transfer">Köçürmə</option>
                 <option value="cash">Nağd</option>
               </Field>
@@ -155,7 +190,7 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 Çatdırılma müddəti
               </label>
-              <Field as={Select} className="w-[200px]">
+              <Field as={Select} className="w-[200px]" name="deliverPeriod">
                 <option value="urgentDeliver">Təcili(7-15 gün)</option>
                 <option value="secondUrgentDeliver">
                   Orta təcili(15-30 gün)
@@ -167,7 +202,7 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 Çatdırılma üsulu
               </label>
-              <Field as={Select} className="w-[200px]">
+              <Field as={Select} className="w-[200px]" name="deliverType">
                 <option value="standart">Standart</option>
                 <option value="simple">Sadələşdirilmiş</option>
               </Field>
@@ -176,7 +211,7 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 İlkin ödəniş
               </label>
-              <Field as={Select} className="w-[200px]">
+              <Field as={Select} className="w-[200px]" name="initialPayment">
                 <option value="0">0%</option>
                 <option value="65">65%</option>
               </Field>
@@ -185,13 +220,13 @@ const Orders = () => {
               <label htmlFor="" className="w-[100px]">
                 Şərh
               </label>
-              <Field as={Textarea} row={10} type="text" className="w-[600px]" />
+              <Field as={Textarea} row={10} type="text" className="w-[600px]" name="comment"/>
             </div>
             <div className="flex gap-2 items-center">
               <label htmlFor="" className="w-[100px]">
                 Yağ
               </label>
-              <Field as={Checkbox} type="checkbox" />
+              <Field as={Checkbox} type="checkbox" name="oil"/>
             </div>
             <FieldArray name="parts">
               {({ push, remove }) => (
@@ -252,12 +287,14 @@ const Orders = () => {
                   <option value=""></option>
                 </Select>
               </div>
+              <Button color="blue" className="mt-3 w-[200px]">Geri qaytarmaq</Button>
             </div>
-
           </div>
           <div className="border flex flex-col gap-2 mt-5 p-4">
             <h2>Şərh yaz</h2>
-            <Textarea/>
+            <Textarea />
+            <Button color="blue" className="mt-3 w-[200px]">Şərh yaz</Button>
+
           </div>
         </div>
       </div>
